@@ -4,7 +4,7 @@ import os
 import re
 import sqlite3
 
-from request_filtering import is_record_important
+from web_log_parser.request_filtering import is_record_important
 from web_log_parser.inventory import LogRecord
 
 logger = logging.getLogger(__name__)
