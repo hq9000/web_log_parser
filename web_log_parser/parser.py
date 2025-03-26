@@ -174,3 +174,5 @@ class Parser:
                 connection.executemany(insert_query, data)
         finally:
             connection.close()
+
+        logger.info(f"Inserted {len(records)} records into the database")
