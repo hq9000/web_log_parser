@@ -153,7 +153,6 @@ class Parser:
         connection = sqlite3.connect(self.sqlite_db_path)
         try:
             with connection:
-
                 connection.execute(create_table_query)
                 connection.execute(create_index_query)
 

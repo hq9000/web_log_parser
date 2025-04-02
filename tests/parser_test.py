@@ -54,6 +54,7 @@ def _get_number_of_rows(sqlite_db_path: str) -> int:
     conn.close()
     return count
 
+
 def _get_last_row(sqlite_db_path: str):
     conn = sqlite3.connect(sqlite_db_path)
     cursor = conn.cursor()
