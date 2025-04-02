@@ -121,6 +121,7 @@ class Parser:
         # Define the table creation query
         create_table_query = f"""
             CREATE TABLE IF NOT EXISTS {self._TABLE_NAME} (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
                 ip TEXT,
                 host TEXT,
                 timestamp REAL,
@@ -136,6 +137,10 @@ class Parser:
             )
         """
 
+        create_index_query = f"""
+            CREATE INDEX IF NOT EXISTS idx_timestamp ON {self._TABLE_NAME} (timestamp)
+        """
+
         # Define the insert query
         insert_query = f"""
             INSERT INTO {self._TABLE_NAME} (
@@ -148,8 +153,9 @@ class Parser:
         connection = sqlite3.connect(self.sqlite_db_path)
         try:
             with connection:
-                # Create the table if it doesn't exist
+
                 connection.execute(create_table_query)
+                connection.execute(create_index_query)
 
                 # Prepare the data for bulk insertion
                 data = [

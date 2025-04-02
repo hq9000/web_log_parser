@@ -42,6 +42,9 @@ def test_something(tmpdir):
     parser.parse()
     assert 12 == _get_number_of_rows(parser.sqlite_db_path)
 
+    last_row = _get_last_row(parser.sqlite_db_path)
+    assert last_row[0] == 12
+
 
 def _get_number_of_rows(sqlite_db_path: str) -> int:
     conn = sqlite3.connect(sqlite_db_path)
@@ -50,3 +53,11 @@ def _get_number_of_rows(sqlite_db_path: str) -> int:
     count = cursor.fetchone()[0]
     conn.close()
     return count
+
+def _get_last_row(sqlite_db_path: str):
+    conn = sqlite3.connect(sqlite_db_path)
+    cursor = conn.cursor()
+    cursor.execute("SELECT * FROM logs ORDER BY id DESC LIMIT 1")
+    row = cursor.fetchone()
+    conn.close()
+    return row
