@@ -139,7 +139,6 @@ class Parser:
             )
         """
 
-
         create_index_query = f"""
             CREATE INDEX IF NOT EXISTS idx_timestamp ON {self._TABLE_NAME} (timestamp)
         """
