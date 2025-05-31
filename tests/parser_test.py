@@ -19,15 +19,15 @@ def test_something(tmpdir):
 
     parser.parse()
 
-    assert 3 == _get_number_of_rows(parser.sqlite_db_path)
+    assert 4 == _get_number_of_rows(parser.sqlite_db_path)
     parser.parse()
-    assert 3 == _get_number_of_rows(parser.sqlite_db_path)
+    assert 4 == _get_number_of_rows(parser.sqlite_db_path)
     os.remove(tmp_log_path)
     parser.parse()
-    assert 3 == _get_number_of_rows(parser.sqlite_db_path)
+    assert 4 == _get_number_of_rows(parser.sqlite_db_path)
     shutil.copyfile(log_path, tmp_log_path)
     parser.parse()
-    assert 6 == _get_number_of_rows(parser.sqlite_db_path)
+    assert 8 == _get_number_of_rows(parser.sqlite_db_path)
 
     # add the contents of tmp_log_path to the file itself
     with open(tmp_log_path, "r") as f:
@@ -36,14 +36,14 @@ def test_something(tmpdir):
         f.writelines(lines)  # add the contents again
 
     parser.parse()
-    assert 9 == _get_number_of_rows(parser.sqlite_db_path)
+    assert 12 == _get_number_of_rows(parser.sqlite_db_path)
 
     shutil.copyfile(log_path, tmp_log_path)
     parser.parse()
-    assert 12 == _get_number_of_rows(parser.sqlite_db_path)
+    assert 16 == _get_number_of_rows(parser.sqlite_db_path)
 
     last_row = _get_last_row(parser.sqlite_db_path)
-    assert last_row[0] == 12
+    assert last_row[0] == 16
 
 
 def _get_number_of_rows(sqlite_db_path: str) -> int:

@@ -23,3 +23,7 @@
 22.11.222.170 - 167.235.66.150 [26/Mar/2025:16:41:08 +0000] "GET /.env HTTP/1.1" 400 248 0.000 "-" "Mozilla/5.0 Keydrop"
 91.81.80.227 - site3.com [26/Mar/2025:16:41:13 +0000] "HEAD / HTTP/1.1" 200 0 0.157 "https://site3.com" "Mozilla/5.0+(compatible; UptimeRobot/2.0; http://www.uptimerobot.com/)"
 77.77.167.123 - site2.de [26/Mar/2025:16:41:17 +0000] "HEAD / HTTP/1.1" 200 0 0.000 "https://site2.de" "Mozilla/5.0+(compatible; UptimeRobot/2.0; http://www.uptimerobot.com/)"
+22.11.222.170 - site1.com [31/May/2025:07:09:03 +0000] "GET /assets/controller/project-2.js.map HTTP/1.1" 404 181 0.000 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36" "1748675193.396"
+22.11.222.170 - site1.com [31/May/2025:07:09:03 +0000] "GET /local/_eee65.ico HTTP/1.1" 200 94724 0.000 "https://site1.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36" "1748675193.396"
+22.11.222.170 - site1.com [31/May/2025:07:09:03 +0000] "GET /assets/controller/project-2.js.map HTTP/1.1" 404 181 0.000 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36" "1748675193.396"
+22.11.222.170 - site1.com [31/May/2025:07:09:03 +0000] "GET / HTTP/1.1" 200 94724 0.000 "https://site1.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36" "1748675193.396"

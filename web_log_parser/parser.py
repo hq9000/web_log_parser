@@ -77,7 +77,7 @@ class Parser:
         log_pattern = re.compile(
             r"(?P<ip>\S+) - (?P<host>\S+) \[(?P<timestamp>[^\]]+)\] "
             r'"(?P<method>\S+) (?P<path>\S+) \S+" (?P<status>\d+) (?P<bytes_sent>\d+) '
-            r'(?P<request_time>[\d.]+) "(?P<referer>[^"]*)" "(?P<user_agent>[^"]*)"'
+            r'(?P<request_time>[\d.]+) "(?P<referer>[^"]*)" "(?P<user_agent>[^"]*)"(?: "(?P<session_id>[^"]*)")?'
         )
 
         match = log_pattern.match(line)
@@ -108,6 +108,7 @@ class Parser:
             ],  # Assuming bytes_sent is the response body size
             request_time=float(data["request_time"]),
             processed_timestamp=datetime.now().timestamp(),
+            session_id=data.get("session_id", None),
         )
 
     def _record_should_be_inserted(self, record: LogRecord) -> bool:
@@ -133,9 +134,11 @@ class Parser:
                 user_agent TEXT,
                 response_body_size TEXT,
                 request_time REAL,
-                processed_timestamp REAL
+                processed_timestamp REAL,
+                session_id TEXT DEFAULT NULL
             )
         """
+
 
         create_index_query = f"""
             CREATE INDEX IF NOT EXISTS idx_timestamp ON {self._TABLE_NAME} (timestamp)
@@ -145,8 +148,8 @@ class Parser:
         insert_query = f"""
             INSERT INTO {self._TABLE_NAME} (
                 ip, host, timestamp, method, path, status, bytes_sent,
-                referer, user_agent, response_body_size, request_time, processed_timestamp
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                referer, user_agent, response_body_size, request_time, processed_timestamp, session_id
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """
 
         # Connect to the SQLite database
@@ -171,6 +174,7 @@ class Parser:
                         record.response_body_size,
                         record.request_time,
                         record.processed_timestamp,
+                        record.session_id,
                     )
                     for record in records
                 ]

@@ -15,3 +15,4 @@ class LogRecord:
     response_body_size: str
     request_time: float
     processed_timestamp: int
+    session_id: str = None
